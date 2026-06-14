@@ -1,61 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Demon's Souls Remake - Ring Checklist</title>
-  <style>
-    :root{--bg:#090909;--panel:#151515;--text:#e8e1d3;--muted:#aaa18f;--gold:#c9a65b;--gold2:#f0d58a;--border:#3a3226;--red:#8f2f2f}*{box-sizing:border-box}body{margin:0;font-family:Georgia,'Times New Roman',serif;background:radial-gradient(circle at top,rgba(201,166,91,.12),transparent 35%),linear-gradient(180deg,#111 0%,var(--bg) 55%,#050505 100%);color:var(--text);min-height:100vh}.wrap{max-width:1050px;margin:0 auto;padding:24px 14px 60px}header{text-align:center;padding:26px 14px 20px;border:1px solid var(--border);background:rgba(16,16,16,.9);box-shadow:0 14px 40px rgba(0,0,0,.45);border-radius:18px;margin-bottom:18px}h1{margin:0;color:var(--gold2);letter-spacing:.08em;text-transform:uppercase;font-size:clamp(1.55rem,5vw,3rem);text-shadow:0 2px 12px rgba(201,166,91,.25)}.subtitle{margin:10px auto 0;color:var(--muted);max-width:760px;line-height:1.45}.controls,.progressBox,.note{background:rgba(20,20,20,.9);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:16px}.search{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--border);background:#0d0d0d;color:var(--text);font-size:1rem;outline:none;margin-bottom:12px}.search:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,166,91,.15)}.filters{display:flex;flex-wrap:wrap;gap:8px}button{font-family:inherit;cursor:pointer;border:1px solid var(--border);background:#171717;color:var(--text);border-radius:999px;padding:9px 12px;transition:.15s ease;font-size:.95rem}button:hover,button.active{border-color:var(--gold);color:#111;background:var(--gold2)}.reset{border-color:#5a3030;color:#ffb1b1}.reset:hover{background:var(--red);color:white;border-color:var(--red)}.progressTop{display:flex;justify-content:space-between;gap:12px;color:var(--gold2);font-weight:700;margin-bottom:10px;flex-wrap:wrap}.bar{height:18px;border-radius:999px;background:#090909;border:1px solid var(--border);overflow:hidden}.barFill{height:100%;width:0;background:linear-gradient(90deg,#8a6a2d,var(--gold2));transition:width .25s ease}.ringList{display:grid;grid-template-columns:1fr;gap:12px}.ring{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:15px;border-radius:16px;background:rgba(21,21,21,.94);border:1px solid var(--border);box-shadow:0 10px 28px rgba(0,0,0,.28)}.ring.hidden{display:none}.ring input[type=checkbox]{width:24px;height:24px;accent-color:var(--gold);margin-top:3px}.ring.done .name{text-decoration:line-through;color:var(--muted)}.name{font-size:1.2rem;color:var(--gold2);font-weight:700;margin-bottom:8px}.locations{display:grid;gap:6px;line-height:1.35}.loc{padding-left:16px;position:relative}.loc:before{content:'•';position:absolute;left:0;color:var(--gold)}.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.badge{font-family:Arial,sans-serif;font-size:.72rem;letter-spacing:.04em;border:1px solid var(--border);background:#0d0d0d;color:var(--muted);padding:4px 7px;border-radius:999px;text-transform:uppercase}.tendency{color:var(--gold2);border-color:var(--gold)}.trade{color:#c5e1b7;border-color:#557947}.nexus{color:#c9c6ff;border-color:#6762a8}.note{color:var(--muted);line-height:1.45}footer{text-align:center;color:var(--muted);margin-top:28px;font-size:.9rem}@media(min-width:850px){.ringList{grid-template-columns:1fr 1fr}}
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demon's Souls Ring Checklist</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="wrap">
-    <header><h1>King of Ring's Trophy Checklist</h1><p class="subtitle">Demon's Souls Remake ring checklist. Tick rings as you collect them. Your progress saves automatically in this browser.</p></header>
-    <section class="controls"><input id="search" class="search" type="search" placeholder="Search ring, location, world, tendency..." /><div class="filters" id="filters"><button class="active" data-filter="all">All</button><button data-filter="world1">World 1</button><button data-filter="world2">World 2</button><button data-filter="world3">World 3</button><button data-filter="world4">World 4</button><button data-filter="world5">World 5</button><button data-filter="nexus">Nexus</button><button data-filter="trade">Trade</button><button data-filter="PWWT">PWWT</button><button data-filter="PBWT">PBWT</button><button data-filter="PWCT">PWCT</button><button data-filter="PBCT">PBCT</button><button class="reset" id="resetBtn" type="button">Reset</button></div></section>
-    <section class="progressBox"><div class="progressTop"><span id="progressText">0 / 30 rings collected</span><span id="percentText">0%</span></div><div class="bar"><div class="barFill" id="barFill"></div></div></section>
-    <main class="ringList" id="ringList"></main>
-    <section class="note"><strong>Please Note:</strong><br>The Ring of Longevity and Providential Ring can both be acquired after talking to Stockpile Thomas after starting a new character with the Deluxe version of the game.<br><br>If you think I missed some or there's something wrong with the checklist, feel free to DM me: <strong>@milkieslol</strong></section>
-    <footer>Made for the Demon's Souls community.</footer>
-  </div>
-<script>
-const rings=[
-{name:"Cat Ring",locations:["Can be bought from Patches in the Nexus for 40k souls.","Can be found in 5-2 (Swamp Of Sorrow), near the cleaver wielding black phantom left of the first fog gate."],tags:["nexus","world5"]},
-{name:"Clever Rat's Ring",locations:["In the middle of the billista platform in 3-1 (Prison Of Hope)."],tags:["world3"]},
-{name:"Cling Ring",locations:["In 1-1 (Gates of Boletaria) by the first tower shortcut."],tags:["world1"]},
-{name:"Dull Rat's Ring",locations:["Can be acquired from Rydell in 3-1 (Prison of Hope). [PWWT]"],tags:["world3","PWWT"]},
-{name:"Fragrant Ring",locations:["In the 3-2 (Upper Latria) swamp next to Primeval Demon.","Trade a brass telescope with Sparkly the Crow.","Can be bought from Patches for 60k souls.","Royalty class starts with this item."],tags:["world3","trade","nexus"]},
-{name:"Ally's Ring",locations:["Can be obtained by talking to the monumental in the nexus. [PWCT]"],tags:["nexus","PWCT"]},
-{name:"Graverobber's Ring",locations:["Dropped by Graverobber Blige.","In 4-1 (Island's Edge), before the boss gate on an elevated ledge."],tags:["world4"]},
-{name:"Master's Ring",locations:["At a dead end of a hallway on a lootable corpse by the second Ballista in Dragon God's arena.","Dropped from executioner Miralda in 1-1 (Gates of Boletaria). [PWWT]"],tags:["world1","world2","PWWT"]},
-{name:"Regenerator's Ring",locations:["Trade the Jade hair ornament with Sparkly the Crow.","By the crystal lizard before the boss in 4-1 (Island's Edge).","On a corpse near the Mirdan Hammer in 5-2 (Swamp of Sorrow)."],tags:["trade","world4","world5"]},
-{name:"Ring of Avarice",locations:["Found where the Heart drops in 3-2 (Upper Latria).","Bought from the Former Noble's Wife in Prison of Hope for 50k souls."],tags:["world3"]},
-{name:"Ring of Devout Prayer",locations:["Dropped by Saint Urbain.","Trade Large Sword of Moonlight with Sparkly, the Crow.","Trade Crest of Vinland with Selen in 5-2 (Swamp of Sorrow). [PWWT]"],tags:["nexus","trade","world5","PWWT"]},
-{name:"Plague Resistance Ring",locations:["On a scaffolding across from the cave with two crystal lizards in 2-2 (Tunnel City).","In 3-2 (Upper Latria) swamp, near the Primeval Demon."],tags:["world2","world3"]},
-{name:"Flame Resistance Ring",locations:["By the dragon's rest in 1-1 (Gates of Boletaria).","Gift from Patches after escaping his trap in 2-2 (Tunnel City)."],tags:["world1","world2"]},
-{name:"Gash Resistance Ring",locations:["On a corpse in the tunnel under the bridge in 1-2 (Lord's Path).","Speak with Patches after Rescuing St. Urbain in 4-2 (Ritual Path)."],tags:["world1","world4","nexus"]},
-{name:"Ring of Great Strength",locations:["By the dragon's rest in 1-1 (Gates of Boletaria).","Dropped by Biorr, of The Twin Fangs."],tags:["world1"]},
-{name:"Ring of Herculean Strength",locations:["Dropped by killing Stockpile Thomas (Nexus).","Give Thomas the Jade Hair Ornament."],tags:["nexus"]},
-{name:"Ring of Magical Dullness",locations:["Trade Phosphorescent Pole with Sparkly the Crow.","On a rooftop near the end of the shortcut in 5-1 (Depraved Chasm)."],tags:["trade","world5"]},
-{name:"Ring of Magical Nature",locations:["In the tower where Yuria, The Witch is held in 1-3 (Inner Ward)."],tags:["world1"]},
-{name:"Ring of Magical Sharpness",locations:["Dropped by Sage Freke. (Nexus)","In an iron maiden on the 4th floor of 3-1 (Prison of Hope)."],tags:["nexus","world3"]},
-{name:"Ring of Poison Resistance",locations:["Corner in the cooled off lava pit in 2-1 (Smithing Grounds).","On the stairs near Executioner Miralda in 1-1 (Gates of Boletaria). [PWWT / PBWT]"],tags:["world1","world2","PWWT","PBWT"]},
-{name:"Ring of Sincere Prayer",locations:["Obtained from killing Maiden Astraea."],tags:["world5"]},
-{name:"Ring of the Accursed",locations:["In the tower where Yuria, The Witch is held in 1-3 (Inner Ward).","Dropped by Mephistopheles (Nexus). [PBCT]"],tags:["world1","nexus","PBCT"]},
-{name:"Ronin's Ring",locations:["Dropped by Scirvir, The Wanderer in 2-2 (Tunnel City). [PWWT]","In the slug cave area in 4-2 (Ritual Path)."],tags:["world2","world4","PWWT"]},
-{name:"Thief Ring",locations:["On a vaulted platform with Ostrava in 1-1 (Gates of Boletaria).","Near Selen Vinland on a small island in 5-2 (Swamp of Sorrow).","Dropped after killing Patches (Nexus)."],tags:["world1","world5","nexus"]},
-{name:"Ring of Longevity",locations:["Trade Pure Bladestone with Sparkly the Crow."],tags:["trade"]},
-{name:"Providential Ring",locations:["Can be picked as a starting gift.","Trade a Large Sword of Searching with Sparkly the Crow."],tags:["trade"]},
-{name:"Sodden Ring",locations:["Behind a pillar in the swamp in 3-2 (Upper Latria). [PBWT]"],tags:["world3","PBWT"]},
-{name:"Ring of Uneven Scales",locations:["Trade a Gold Coin with Sparkly the Crow."],tags:["trade"]},
-{name:"Eternal Warrior's Ring",locations:["Dropped by defeating Old King Duran in 1-1 (Gates of Boletaria)."],tags:["world1"]},
-{name:"Foe's Ring",locations:["Given by Mephistopheles after killing Yuria, the Witch (Nexus). [PBCT]"],tags:["nexus","PBCT"]}
-];
-const STORAGE_KEY="des_rings_checklist_v1",list=document.getElementById("ringList"),search=document.getElementById("search"),filters=document.getElementById("filters"),progressText=document.getElementById("progressText"),percentText=document.getElementById("percentText"),barFill=document.getElementById("barFill"),resetBtn=document.getElementById("resetBtn");let activeFilter="all",checked=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}");
-function tagLabel(t){return({world1:"World 1",world2:"World 2",world3:"World 3",world4:"World 4",world5:"World 5",nexus:"Nexus",trade:"Trade"})[t]||t}function tagClass(t){if(["PWWT","PBWT","PWCT","PBCT"].includes(t))return"tendency";if(t==="trade")return"trade";if(t==="nexus")return"nexus";return""}
-function render(){list.innerHTML="";rings.forEach((ring,i)=>{const id=`ring-${i}`,card=document.createElement("article");card.className="ring";card.dataset.tags=ring.tags.join(" ");card.dataset.search=(ring.name+" "+ring.locations.join(" ")+" "+ring.tags.join(" ")).toLowerCase();if(checked[id])card.classList.add("done");card.innerHTML=`<input type="checkbox" ${checked[id]?"checked":""} aria-label="${ring.name}"><div><div class="name">${ring.name}</div><div class="locations">${ring.locations.map(loc=>`<div class="loc">${loc}</div>`).join("")}</div><div class="badges">${ring.tags.map(tag=>`<span class="badge ${tagClass(tag)}">${tagLabel(tag)}</span>`).join("")}</div></div>`;const box=card.querySelector("input");box.addEventListener("change",()=>{checked[id]=box.checked;localStorage.setItem(STORAGE_KEY,JSON.stringify(checked));card.classList.toggle("done",box.checked);updateProgress()});list.appendChild(card)});updateProgress();applyFilters()}
-function updateProgress(){const total=rings.length,collected=Object.values(checked).filter(Boolean).length,percent=Math.round(collected/total*100);progressText.textContent=`${collected} / ${total} rings collected`;percentText.textContent=`${percent}%`;barFill.style.width=`${percent}%`}
-function applyFilters(){const q=search.value.trim().toLowerCase();document.querySelectorAll(".ring").forEach(card=>{const matchesSearch=!q||card.dataset.search.includes(q),matchesFilter=activeFilter==="all"||card.dataset.tags.split(" ").includes(activeFilter);card.classList.toggle("hidden",!(matchesSearch&&matchesFilter))})}
-filters.addEventListener("click",e=>{const btn=e.target.closest("button[data-filter]");if(!btn)return;activeFilter=btn.dataset.filter;document.querySelectorAll("button[data-filter]").forEach(b=>b.classList.remove("active"));btn.classList.add("active");applyFilters()});search.addEventListener("input",applyFilters);resetBtn.addEventListener("click",()=>{if(!confirm("Reset all checked rings?"))return;checked={};localStorage.removeItem(STORAGE_KEY);render()});render();
-</script>
+  <div class="fog"></div>
+  <main class="shell">
+    <header class="hero">
+      <p class="eyebrow">Demon's Souls Remake</p>
+      <h1>Ring Checklist</h1>
+      <p class="subtitle">Track every ring for the King of Ring's trophy. Progress saves automatically in this browser.</p>
+    </header>
+
+    <section class="panel controls" aria-label="Checklist controls">
+      <label class="search-wrap" for="searchInput">
+        <span>⌕</span>
+        <input id="searchInput" type="search" placeholder="Search ring, location, world, tendency..." autocomplete="off" />
+      </label>
+
+      <div class="filters" id="filters" aria-label="Filters"></div>
+
+      <div class="progress-card">
+        <div class="progress-text">
+          <strong id="progressText">0 / 30 rings collected</strong>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
+      </div>
+
+      <div class="actions">
+        <button id="resetBtn" type="button">Reset progress</button>
+      </div>
+    </section>
+
+    <section id="ringsList" class="rings-list" aria-live="polite"></section>
+
+    <footer class="footer">
+      <p>Checklist data based on Milkies' ring document. Built by DeSChecklists.</p>
+    </footer>
+  </main>
+
+  <script src="rings.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

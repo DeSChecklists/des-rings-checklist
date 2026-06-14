@@ -1,0 +1,203 @@
+:root{
+  --bg:#050607;
+  --panel:#0c0d0f;
+  --panel-2:#111318;
+  --line:#312a20;
+  --line-bright:#705f42;
+  --gold:#e4c878;
+  --gold-soft:#bfa66a;
+  --text:#e8e1d2;
+  --muted:#a79d8e;
+  --blue:#8ea9c7;
+  --red:#c27a76;
+  --green:#94b48f;
+  --shadow:rgba(0,0,0,.55);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(137,123,93,.25), transparent 34rem),
+    radial-gradient(circle at 20% 20%, rgba(50,65,80,.22), transparent 22rem),
+    linear-gradient(90deg, rgba(0,0,0,.78), transparent 18%, transparent 82%, rgba(0,0,0,.78)),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.018) 0 1px, transparent 1px 6px),
+    var(--bg);
+  overflow-x:hidden;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.22;
+  background:
+    linear-gradient(to bottom, transparent, rgba(0,0,0,.35)),
+    repeating-radial-gradient(circle at 30% 20%, rgba(255,255,255,.05) 0 1px, transparent 1px 6px);
+  mix-blend-mode:screen;
+}
+
+.fog{
+  position:fixed;
+  inset:-10%;
+  pointer-events:none;
+  opacity:.18;
+  background:
+    radial-gradient(ellipse at 35% 35%, rgba(160,170,180,.35), transparent 25%),
+    radial-gradient(ellipse at 70% 20%, rgba(160,170,180,.25), transparent 22%),
+    radial-gradient(ellipse at 50% 80%, rgba(160,170,180,.18), transparent 30%);
+  filter:blur(18px);
+  animation:fog 18s ease-in-out infinite alternate;
+}
+@keyframes fog{from{transform:translateX(-2%)}to{transform:translateX(2%)}}
+
+.shell{
+  width:min(980px, calc(100% - 28px));
+  margin:0 auto;
+  padding:28px 0 38px;
+  position:relative;
+}
+
+.hero{
+  text-align:center;
+  padding:32px 18px 28px;
+  margin-bottom:16px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:
+    linear-gradient(180deg, rgba(22,24,27,.86), rgba(7,8,9,.94)),
+    linear-gradient(90deg, transparent, rgba(228,200,120,.07), transparent);
+  box-shadow:0 18px 60px var(--shadow), inset 0 0 24px rgba(228,200,120,.04);
+}
+.eyebrow{
+  margin:0 0 8px;
+  color:var(--gold-soft);
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  font-size:.78rem;
+}
+h1{
+  margin:0;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:clamp(2.3rem, 7vw, 4.2rem);
+  line-height:.95;
+  text-shadow:0 2px 0 #000, 0 0 24px rgba(228,200,120,.22);
+}
+.subtitle{
+  margin:16px auto 0;
+  color:var(--muted);
+  max-width:620px;
+  line-height:1.5;
+}
+
+.panel{
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(18,19,22,.94), rgba(8,9,10,.95));
+  box-shadow:0 12px 40px var(--shadow), inset 0 0 18px rgba(255,255,255,.025);
+}
+.controls{padding:14px;margin-bottom:14px}
+.search-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border:1px solid var(--line-bright);
+  border-radius:10px;
+  background:#050607;
+  box-shadow:inset 0 0 12px rgba(0,0,0,.65), 0 0 0 2px rgba(228,200,120,.05);
+}
+.search-wrap span{color:var(--gold);font-size:1.4rem}
+input{
+  width:100%;
+  border:0;
+  outline:0;
+  color:var(--text);
+  background:transparent;
+  font:inherit;
+  font-size:1rem;
+}
+input::placeholder{color:#7d7467}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.filter-btn,.actions button{
+  cursor:pointer;
+  color:var(--text);
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:linear-gradient(180deg, #171512, #090909);
+  padding:8px 12px;
+  font:700 .84rem Georgia, serif;
+  letter-spacing:.03em;
+}
+.filter-btn:hover,.filter-btn.active{color:#111;background:var(--gold);border-color:var(--gold)}
+.actions button{color:#f1c0bd;border-color:#6b3634;margin-top:2px}
+.actions button:hover{background:#3a1614}
+
+.progress-card{padding:12px 0 2px}
+.progress-text{display:flex;justify-content:space-between;gap:12px;margin-bottom:8px;color:var(--gold)}
+.progress-track{height:13px;border-radius:999px;background:#040404;border:1px solid #1d1a14;overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg, #6e5b2c, var(--gold), #fff0aa);transition:width .25s ease}
+
+.rings-list{display:grid;gap:12px}
+.ring-card{
+  position:relative;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:14px;
+  align-items:start;
+  padding:17px 18px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.035), transparent 32%),
+    linear-gradient(180deg, rgba(20,22,25,.94), rgba(9,10,11,.96));
+  box-shadow:0 10px 28px var(--shadow), inset 0 0 20px rgba(255,255,255,.02);
+}
+.ring-card:before,.ring-card:after{content:"";position:absolute;width:18px;height:18px;border-color:var(--line-bright);opacity:.55}
+.ring-card:before{left:6px;top:6px;border-left:1px solid;border-top:1px solid}
+.ring-card:after{right:6px;bottom:6px;border-right:1px solid;border-bottom:1px solid}
+.ring-card.done{opacity:.58}
+.ring-card.done .ring-name{text-decoration:line-through;text-decoration-thickness:2px}
+
+.check{
+  width:22px;height:22px;margin-top:3px;accent-color:var(--gold);
+}
+.ring-name{margin:0 0 8px;color:var(--gold);font-size:1.35rem;letter-spacing:.04em}
+.details{margin:0;padding-left:20px;color:var(--text);line-height:1.45}
+.details li{margin:.25rem 0}
+.badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.badge{
+  border:1px solid var(--line-bright);
+  border-radius:999px;
+  padding:4px 8px;
+  color:var(--gold-soft);
+  background:#080808;
+  font-size:.74rem;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.badge.world{color:#d8d1c3}.badge.white{color:#f2efdc}.badge.black{color:#c7a8ff}.badge.trade{color:#98d2ff}.badge.nexus{color:#a8c8ff}
+.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px}
+.footer{text-align:center;color:#7d7467;font-size:.9rem;margin-top:20px}
+
+@media (max-width:620px){
+  .shell{width:min(100% - 18px, 980px);padding-top:12px}
+  .hero{padding:24px 12px}
+  h1{font-size:2.35rem;letter-spacing:.08em}
+  .subtitle{font-size:.95rem}
+  .controls{padding:10px}
+  .filter-btn,.actions button{padding:8px 10px;font-size:.78rem}
+  .ring-card{grid-template-columns:auto 1fr;padding:15px 13px;gap:10px}
+  .ring-name{font-size:1.15rem}
+  .details{padding-left:18px;font-size:.94rem}
+  .progress-text{font-size:.92rem}
+}
