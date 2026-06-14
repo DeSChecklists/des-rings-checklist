@@ -1,4 +1,5 @@
 const STORAGE_KEY = "des-rings-checklist-v2";
+RINGS.sort((a, b) => a.name.localeCompare(b.name));
 const WORLD_LABELS = {
   "1": "⚔️ World 1",
   "2": "⛏️ World 2",
