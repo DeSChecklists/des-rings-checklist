@@ -30,3 +30,4 @@ const RINGS = [
   {name:"Eternal Warrior's Ring",details:["Dropped by defeating Old King Doran in 1-1 (Gates of Boletaria)."]},
   {name:"Foe's Ring",details:["Given by Mephistopheles after killing Yuria, the Witch (Nexus). [Pure Black Character Tendency]"]}
 ];
+rings.sort((a, b) => a.name.localeCompare(b.name));
