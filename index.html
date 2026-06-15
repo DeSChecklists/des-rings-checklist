@@ -3,79 +3,54 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Demon's Souls Checklists</title>
-
+  <title>King of Ring's Trophy Checklist • Demon's Souls Remake</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="apple-touch-icon" href="favicon.png">
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
   <div class="fog"></div>
+  <main class="shell">
+    <header class="hero">
+      <p class="eyebrow">Demon's Souls Remake</p>
+      <h1>Ring Checklist</h1>
+      <p class="subtitle">Track every ring for the King of Ring's trophy. Progress saves automatically in this browser.</p>
+    </header>
 
-  <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <section class="panel controls" aria-label="Checklist controls">
+      <label class="search-wrap" for="searchInput">
+        <span>⌕</span>
+        <input id="searchInput" type="search" placeholder="Search ring, location, world, tendency..." autocomplete="off" />
+      </label>
 
-  <aside id="sideMenu" class="side-menu">
-    <h2>DeS Checklists</h2>
-    <a href="index.html">🏠 Home</a>
-    <a href="rings.html">💍 Rings</a>
-    <a href="boss-souls.html">👹 Boss Souls</a>
-    <a href="spells.html">✨ Spells</a>
-    <a href="miracles.html">🙏 Miracles</a>
-    <a href="weapons.html">⚔️ Boss Weapons</a>
-  </aside>
+      <div class="filters" id="filters" aria-label="Filters"></div>
 
-  <main class="home-wrap">
-    <section class="hero">
-      <img src="favicon.png" class="home-logo" alt="Demon's Souls Logo">
-
-      <h1>Demon's Souls Checklists</h1>
-      <p class="subtitle">The Monumental awaits...</p>
-
-      <div class="home-grid">
-        <a class="home-card" href="rings.html">
-          <span>💍</span>
-          <h3>Rings Checklist</h3>
-          <p>Track every ring required for the trophy.</p>
-        </a>
-
-        <a class="home-card" href="boss-souls.html">
-          <span>👹</span>
-          <h3>Boss Souls Checklist</h3>
-          <p>Boss souls, spells, miracles and weapons.</p>
-        </a>
-
-        <a class="home-card disabled" href="#">
-          <span>✨</span>
-          <h3>Spells</h3>
-          <p>Coming soon.</p>
-        </a>
-
-        <a class="home-card disabled" href="#">
-          <span>🙏</span>
-          <h3>Miracles</h3>
-          <p>Coming soon.</p>
-        </a>
-
-        <a class="home-card disabled" href="#">
-          <span>⚔️</span>
-          <h3>Boss Weapons</h3>
-          <p>Coming soon.</p>
-        </a>
+      <div class="progress-card">
+        <div class="progress-text">
+          <strong id="progressText">0 / 30 rings collected</strong>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
       </div>
 
-      <footer>
-        Built by DESChecklists
-      </footer>
+      <div class="actions">
+        <button id="resetBtn" type="button">Reset progress</button>
+      </div>
     </section>
+
+    <section id="ringsList" class="rings-list" aria-live="polite"></section>
+
+    <footer class="footer">
+      <p><strong>Please Note:</strong></p>
+      <p>The Ring of Longevity and Providential Ring can both be acquired after talking to Stockpile Thomas after starting a new character with the Deluxe version of the game.</p>
+      <p>If you think i missed some or there’s something wrong with the checklist,<br>feel free to dm me: <strong>@milkieslol</strong></p>
+      <p class="built-by">Built by DESChecklists</p>
+    </footer>
   </main>
 
-  <script>
-    function toggleMenu() {
-      document.getElementById("sideMenu").classList.toggle("open");
-    }
-  </script>
+  <script src="rings.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
